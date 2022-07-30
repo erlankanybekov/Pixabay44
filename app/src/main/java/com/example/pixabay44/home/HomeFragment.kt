@@ -43,18 +43,16 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-     //   binding.swipeToRefresh.setOnRefreshListener(this)
+        binding.progressBar.visibility = View.INVISIBLE
         initClickers()
-
-
-
 
     }
 
     private fun initClickers() {
 
          binding.requestBtn.setOnClickListener {
-                doRequest(page)
+                doRequest(page++)
+             binding.progressBar.visibility = View.VISIBLE
             }
            binding.changePageBtn.setOnClickListener {
 
@@ -83,7 +81,6 @@ class HomeFragment : Fragment() {
                         binding.recyclerView.adapter = imageAdapter
 
 
-                        // binding.swipeToRefresh.isRefreshing = false
                         Log.e("ololo", "onResponse:${page} ${response.body()?.hits}")
                     }
 
