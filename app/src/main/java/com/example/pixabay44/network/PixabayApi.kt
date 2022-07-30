@@ -12,7 +12,7 @@ interface PixabayApi {
         @Query("key")key:String="28914088-0fb59487549a00cfcac299658",
         @Query("q")keyWord:String,
         @Query("page")page:Int,
-        @Query("per_page")perPage:Int=12
+        @Query("per_page")perPage:Int=15
     ):Call<PixabayModel>
 
 }
