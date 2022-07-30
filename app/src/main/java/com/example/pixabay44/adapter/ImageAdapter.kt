@@ -29,11 +29,12 @@ class ImageAdapter(private val list: ArrayList<ImageModel>):RecyclerView.Adapter
 
     override fun getItemCount(): Int = list.size
 
-
-
-    fun clear(){
-        list.clear()
+    fun addList(model: ArrayList<ImageModel>){
+        list.addAll(model)
         notifyDataSetChanged()
     }
+
+
+
 
 }

@@ -28,10 +28,9 @@ import retrofit2.Response
 class HomeFragment : Fragment() {
 
     lateinit var binding: FragmentHomeBinding
-    var page = 1
+    var page:Int = 1
     var imageAdapter = ImageAdapter(arrayListOf())
     lateinit var list: ArrayList<ImageModel>
-    lateinit var layoutManager: GridLayoutManager
 
 
     override fun onCreateView(
@@ -55,7 +54,7 @@ class HomeFragment : Fragment() {
     private fun initClickers() {
 
          binding.requestBtn.setOnClickListener {
-                doRequest(page++)
+                doRequest(page)
             }
            binding.changePageBtn.setOnClickListener {
 
@@ -74,9 +73,15 @@ class HomeFragment : Fragment() {
                     ) {
                         response.body()?.hits?.let {
                             list = it as ArrayList<ImageModel>
+                        }
+                        if (response.body()?.hits!=null){
+                            imageAdapter.addList(list)
+                        }else{
                             imageAdapter = ImageAdapter(list)
                             binding.recyclerView.adapter = imageAdapter
                         }
+                        binding.recyclerView.adapter = imageAdapter
+
 
                         // binding.swipeToRefresh.isRefreshing = false
                         Log.e("ololo", "onResponse:${page} ${response.body()?.hits}")
