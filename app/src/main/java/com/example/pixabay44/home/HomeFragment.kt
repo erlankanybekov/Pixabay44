@@ -44,7 +44,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.progressBar.visibility = View.GONE
+        binding.progressBar.visibility = View.INVISIBLE
         layoutManager = GridLayoutManager(requireContext(),3)
         initClickers()
 
@@ -54,6 +54,7 @@ class HomeFragment : Fragment() {
     private fun initClickers() {
 
          binding.requestBtn.setOnClickListener {
+             binding.progressBar.visibility = View.VISIBLE
                 doRequest(page++)
             }
            binding.changePageBtn.setOnClickListener {
