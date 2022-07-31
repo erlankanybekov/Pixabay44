@@ -34,16 +34,16 @@
             android:textColor="@color/white"
             android:text="request"
             android:background="@drawable/gradient"
-            android:id="@+id/changePageBtn"
+            android:id="@+id/requestBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:ignore="SpeakableTextPresentCheck" />
         <Button
             android:layout_marginTop="12dp"
             android:textColor="@color/white"
-            android:text="change page"
+            android:text="clear"
             android:background="@drawable/gradient"
-            android:id="@+id/requestBtn"
+            android:id="@+id/changePageBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:ignore="SpeakableTextPresentCheck" />

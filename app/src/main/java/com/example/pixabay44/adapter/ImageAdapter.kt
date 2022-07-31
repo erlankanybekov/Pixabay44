@@ -34,6 +34,11 @@ class ImageAdapter(private val list: ArrayList<ImageModel>):RecyclerView.Adapter
         notifyDataSetChanged()
     }
 
+    fun clear(){
+        list.clear()
+        notifyDataSetChanged()
+    }
+
 
 
 

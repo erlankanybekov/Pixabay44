@@ -58,7 +58,10 @@ class HomeFragment : Fragment() {
                 doRequest(page++)
             }
            binding.changePageBtn.setOnClickListener {
-                doRequest(page++)
+               Handler(Looper.myLooper()!!).postDelayed({
+                   binding.progressBar.visibility = View.GONE
+               },2500)
+                imageAdapter.clear()
             }
         binding.recyclerView.addOnScrollListener(object :RecyclerView.OnScrollListener(){
 
@@ -72,7 +75,7 @@ class HomeFragment : Fragment() {
                         e.printStackTrace()
                     }
                 }
-            }
+           }
         })
 
     }
