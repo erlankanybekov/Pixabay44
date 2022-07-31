@@ -2,6 +2,7 @@ package com.example.pixabay44.home
 
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -24,13 +25,13 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-
 class HomeFragment : Fragment() {
 
-    lateinit var binding: FragmentHomeBinding
-    var page:Int = 1
-    var imageAdapter = ImageAdapter(arrayListOf())
-    lateinit var list: ArrayList<ImageModel>
+    private  lateinit var binding: FragmentHomeBinding
+    private var page:Int = 1
+    private var imageAdapter = ImageAdapter(arrayListOf())
+    private lateinit var list: ArrayList<ImageModel>
+    private lateinit var layoutManager:GridLayoutManager
 
 
     override fun onCreateView(
@@ -43,8 +44,10 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.progressBar.visibility = View.INVISIBLE
+        binding.progressBar.visibility = View.GONE
+        layoutManager = GridLayoutManager(requireContext(),3)
         initClickers()
+
 
     }
 
@@ -52,15 +55,26 @@ class HomeFragment : Fragment() {
 
          binding.requestBtn.setOnClickListener {
                 doRequest(page++)
-             binding.progressBar.visibility = View.VISIBLE
             }
            binding.changePageBtn.setOnClickListener {
-
                 doRequest(page++)
             }
+        binding.recyclerView.addOnScrollListener(object :RecyclerView.OnScrollListener(){
+
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (!recyclerView.canScrollVertically(1)){
+                    try {
+                        doRequest(page++)
+
+                    }catch (e:Exception){
+                        e.printStackTrace()
+                    }
+                }
+            }
+        })
 
     }
-
 
     private fun doRequest(page:Int) {
             App.api.getImagesByWord(keyWord = binding.keywordEd.text.toString().trim(), page = page)
@@ -71,15 +85,10 @@ class HomeFragment : Fragment() {
                     ) {
                         response.body()?.hits?.let {
                             list = it as ArrayList<ImageModel>
-                        }
-                        if (response.body()?.hits!=null){
                             imageAdapter.addList(list)
-                        }else{
-                            imageAdapter = ImageAdapter(list)
-                            binding.recyclerView.adapter = imageAdapter
                         }
-                        binding.recyclerView.adapter = imageAdapter
 
+                        binding.recyclerView.adapter = imageAdapter
 
                         Log.e("ololo", "onResponse:${page} ${response.body()?.hits}")
                     }
