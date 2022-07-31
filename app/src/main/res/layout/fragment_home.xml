@@ -43,7 +43,7 @@
             android:textColor="@color/white"
             android:text="clear"
             android:background="@drawable/gradient"
-            android:id="@+id/changePageBtn"
+            android:id="@+id/clearPageBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:ignore="SpeakableTextPresentCheck" />

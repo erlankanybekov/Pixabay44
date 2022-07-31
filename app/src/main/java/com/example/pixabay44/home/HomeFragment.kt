@@ -57,7 +57,7 @@ class HomeFragment : Fragment() {
              binding.progressBar.visibility = View.VISIBLE
                 doRequest(page++)
             }
-           binding.changePageBtn.setOnClickListener {
+           binding.clearPageBtn.setOnClickListener {
                Handler(Looper.myLooper()!!).postDelayed({
                    binding.progressBar.visibility = View.GONE
                },2500)
