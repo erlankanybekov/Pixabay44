@@ -78,14 +78,9 @@ class HomeFragment : Fragment() {
                 ) {
                     response.body()?.hits?.let {
                         list = it as ArrayList<ImageModel>
-                    }
-                    if (page - 1 != 0) {
                         imageAdapter.addList(list)
-                    } else {
-                        imageAdapter = ImageAdapter(list)
                         binding.recyclerView.adapter = imageAdapter
                     }
-                    binding.recyclerView.adapter = imageAdapter
 
                     Log.e("ololo", "onResponse:${page} ${response.body()?.hits}")
                 }
