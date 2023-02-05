@@ -7,13 +7,14 @@ import coil.load
 import com.example.pixabay44.databinding.ItemImageRvBinding
 import com.example.pixabay44.model.ImageModel
 
-class ImageAdapter(private val list: ArrayList<ImageModel>):RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
+class ImageAdapter(private val list: ArrayList<ImageModel> = arrayListOf()):RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
 
 
     inner class ImageViewHolder(private val binding: ItemImageRvBinding) : RecyclerView.ViewHolder(binding.root){
         fun onBind(model:ImageModel){
             binding.pixabayimage.load(model.largeImageURL)
         }
+
 
 
     }
@@ -33,10 +34,15 @@ class ImageAdapter(private val list: ArrayList<ImageModel>):RecyclerView.Adapter
         list.addAll(model)
         notifyDataSetChanged()
     }
+    var isLoading = false
 
     fun clear(){
         list.clear()
         notifyDataSetChanged()
+    }
+
+    fun startLoading() {
+        isLoading = true
     }
 
 
